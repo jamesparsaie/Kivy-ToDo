@@ -1,0 +1,73 @@
+<ListItemWithCheckbox1>:
+
+    IconLeftWidget:
+        icon: root.icon
+
+    RightCheckbox:
+
+
+WindowManager:
+    DummyScreen:
+        name: 'dummy'
+    ToDo:
+        name: 'todo'
+    AddEntry:
+        name: 'add'
+
+
+<ToDo>:
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        MDToolbar:
+            id: bar
+            title: ""
+            right_action_items: [['plus', lambda x: root.switch()]]
+        ScrollView:
+            MDList:
+                id: main
+                #Will be populated by the user in following screen
+
+
+
+<AddEntry>:
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height 
+        MDToolbar:
+            title: 'Add new task'
+            left_action_items: [['keyboard-backspace', lambda x: root.switch()]]
+
+        MDLabel:
+            text: 'Enter name of task below'
+            halign: 'center'
+            font_name: "arialbd"
+        MDTextField:
+            id: task
+            icon_right: 'account'
+            write_tab: False
+            size_hint_x: None
+            width: 200
+            pos_hint: {'center_x':.5}
+        MDLabel:
+            text: 'Enter short description'
+            halign: 'center'
+            font_name: "arialbd"
+        MDTextField:
+            id: desc
+            hint_text: "Optional"
+            icon_right: 'account-details'
+            write_tab: False
+            size_hint_x: None
+            width: 200
+            pos_hint: {'center_x':.5}
+        Widget:
+
+        MDRaisedButton:
+            text: "Create"
+            pos_hint: {'center_x':.5}
+            on_press: 
+                root.addTask()
+                task.text = ''
+                desc.text = ''
+        Widget:
